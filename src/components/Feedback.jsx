@@ -1,0 +1,4 @@
+import React from 'react';
+import {feedbackTypes} from '../model';
+export function FeedbackButtons({outfit,onFeedback}) {return <section className="feedback-box"><h3>这套搭配，合你心意吗？</h3><p>“今天不想穿”只影响今天；其余反馈会适度调整后续推荐，可随时撤销。</p><div className="feedback-buttons">{feedbackTypes.map(type=><button className="button" key={type} onClick={()=>onFeedback(outfit,type)}>{type}</button>)}</div></section>;}
+export function FeedbackHistory({feedback,onRemove,onReset}) {return <section className="settings-card"><h2>我告诉过衣序的偏好</h2><p>喜欢的单品会适度加分；冷热反馈最多调整 3°C，正式程度反馈只用于相同场景。反馈可以逐条撤销。</p>{feedback.length?<><ul className="feedback-history">{feedback.slice().reverse().slice(0,20).map(f=><li key={f.id}><span>{f.type}<small>{f.date} · {f.occasion}</small></span><button className="text-link" onClick={()=>onRemove(f.id)}>撤销</button></li>)}</ul><button className="button" onClick={onReset}>重置全部反馈</button></>:<p>还没有反馈。在搭配详情中告诉我你的感受吧。</p>}</section>;}
